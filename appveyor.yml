@@ -34,13 +34,20 @@ build_script:
   - ps: |
       if ($env:BUILD -eq "Kodi") {
         # Download dependencies
+        Write-Host "checkpoint 1 --------------------------------------------------"
+
         cd $env:APPVEYOR_BUILD_FOLDER\project\BuildDependencies
         & .\DownloadBuildDeps.bat
+
+        Write-Host "checkpoint 2 --------------------------------------------------"
+        cd $env:APPVEYOR_BUILD_FOLDER\project\BuildDependencies
         & .\DownloadMingwBuildEnv.bat
 
+        Write-Host "checkpoint 3 --------------------------------------------------"
         cd $env:APPVEYOR_BUILD_FOLDER\tools\buildsteps\windows\win32
         & .\make-mingwlibs.bat
 
+        Write-Host "checkpoint 4 --------------------------------------------------"
         # Build
         mkdir $env:APPVEYOR_BUILD_FOLDER\kodi-build
         cd $env:APPVEYOR_BUILD_FOLDER\kodi-build
