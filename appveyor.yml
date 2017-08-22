@@ -36,9 +36,7 @@ build_script:
         # Download dependencies
         cd $env:APPVEYOR_BUILD_FOLDER\project\BuildDependencies
         & .\DownloadBuildDeps.bat
-
-        # We are using AppVeyor's already installed msys64 environment,
-        # no need to install msys/mingw environment.
+        & .\DownloadMingwBuildEnv.bat
 
         cd $env:APPVEYOR_BUILD_FOLDER\tools\buildsteps\windows\win32
         & .\make-mingwlibs.bat
